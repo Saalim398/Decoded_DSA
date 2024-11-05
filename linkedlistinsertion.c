@@ -39,6 +39,7 @@ void insert(struct node **head,int data, int position){
     }
     
 }
+
 void display(){
     struct node *temp = head;
     while (temp !=NULL)
@@ -56,5 +57,6 @@ int main()
     insert(&head,4,2);
     insert(&head,5,2);//it shifted 4 to position 3
     display();
+    
    return 0;
 }

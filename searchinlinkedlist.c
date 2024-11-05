@@ -1,6 +1,8 @@
 //program to insert element at any position in a linked list 
+
+
 #include <stdio.h>
-#include <stdlib.h>
+#include<stdlib.h>
 struct node
 {
     int data;
@@ -8,30 +10,19 @@ struct node
 };
 struct node* head;
 
-struct node * delete(struct node *head){
-    struct node *p = head;//pointer to head node
-    struct node *q = head->next;
-    while (q->next!=NULL)
-    {
-        p = p->next;
-        q = q->next;
-    }    
-    p->next = NULL;
-    free(q);
-    return head;
-}
-void insert(struct node **head,int data, int position){
-     int k = 1;
-     struct node *p,*q;
-     struct node* newdata;
-     newdata = (struct node*)malloc(sizeof(struct node));
 
-     newdata->data = data;
-     newdata->next = NULL;
-     p = *head;
-     //insertion at first position 
-     if (position==1)
-     {
+void insert(struct node **head,int data, int position){
+    int k = 1;
+    struct node *p,*q;
+    struct node* newdata;
+    newdata = (struct node*)malloc(sizeof(struct node));
+
+    newdata->data = data;
+    newdata->next = NULL;
+    p = *head;
+    //insertion at first position 
+    if (position==1)
+    {
         newdata->next = p;
         *head = newdata;
     }
@@ -45,9 +36,31 @@ void insert(struct node **head,int data, int position){
         q->next = newdata;
         newdata->next = p;
         
-    }    
+    }
+    
 }
+void search(int key){
+    struct node* ptr = head;
+    int pos = 1;
+    while (ptr->next!=NULL)
+    {
+        
+        if (ptr->data==key)
+        {
+            printf("Found at position %d ",pos);
+            return;
 
+        }
+        
+        ptr = ptr->next;
+        pos++;
+        
+    }
+    printf("Item not found");
+
+    
+    
+}
 void display(){
     struct node *temp = head;
     while (temp !=NULL)
@@ -60,14 +73,11 @@ void display(){
 
 int main()
 {
-    head = NULL;
+   head = NULL;
     insert(&head,3,1);
     insert(&head,4,2);
     insert(&head,5,2);//it shifted 4 to position 3
     display();
-    head = delete(head);
-    printf("\n");
-    display();
-
+    search(5);
    return 0;
 }
