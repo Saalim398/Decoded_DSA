@@ -17,7 +17,6 @@ void display(struct node* head){
         printf("element is %d\n",ptr->data);
         ptr = ptr->next;
     }
-    
 }
 
 
