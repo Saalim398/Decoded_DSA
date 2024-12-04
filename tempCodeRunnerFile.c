@@ -1,5 +1,3 @@
-if (temp->number = NULL)
-    {
-        temp->next = head;
-
-    }
+ // if (i == n) 
+    // {
+    // }

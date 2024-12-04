@@ -21,9 +21,12 @@ void pop() {
         return;
     }
     
-   
     for (int i = 0; i <= top; i++) {
         stack2[i] = stack[top - i];
+    }
+    for (int i = 0; i <=top; i++)
+    {
+        printf("%d ",stack[i]);
     }
     
    
