@@ -3,46 +3,71 @@
 struct node
 {
     int data;
-    struct node*next;
+    struct node* next;
 };
+struct node* head;
 
-
-void display(struct node* head){
-    struct node *ptr = head;
-
-    printf("element is %d\n",ptr->data);
-    ptr = ptr->next;
-    while (ptr!=head)
+struct node* create(struct node* head,int data){
+    struct node* temp = malloc(sizeof(struct node));
+    if (temp == NULL)
     {
-        printf("element is %d\n",ptr->data);
-        ptr = ptr->next;
+        printf("Memory allocation failed");
+        return head;
     }
+    temp->data = data;
+    temp->next = NULL;
+
+    if (head == NULL)
+    {
+        temp->next = temp;
+        head = temp;
+    }
+    else{
+        struct node* p = head;//pointer to head
+        while (p->next!=head)
+        {
+            p = p->next;
+        }
+        p->next = temp;
+        temp->next = head;
+        
+    }
+    
+    return head;
+    
+}
+
+void displayList() {
+    if (head == NULL) {
+        printf("Circular Linked List is empty\n");
+        return;
+    }
+
+    struct node* temp = head;
+    printf("Circular Linked List: ");
+    do {
+        printf("%d -> ", temp->data);
+        temp = temp->next;
+    } while (temp != head);
+    printf("(back to head)\n");
 }
 
 
 int main()
 {
-   struct node* head;
-   struct node* second;
-   struct node* third;
-   struct node* fourth;
+    head = NULL;
+    int numNodes, data;
 
-   head = (struct node*)malloc(sizeof(struct node*));
-   second = (struct node*)malloc(sizeof(struct node*));
-   third = (struct node*)malloc(sizeof(struct node*));
-   fourth = (struct node*)malloc(sizeof(struct node*));
+    printf("Enter the number of nodes to be created: ");
+    scanf("%d", &numNodes);
 
-   head->data = 7;
-   head->next = second;
-    second->data = 5;
-    second->next = third;
-    third->data =11;
-    third->next = fourth;
-    fourth->data =13;
-    fourth->next = head; ;
+    for (int i = 0; i < numNodes; i++) {
+        printf("Enter data for node %d: ", i + 1);
+        scanf("%d", &data);
+        head = create(head,data);
+    }
 
-
-    display(head);
-
+    // Display the circular linked list
+    displayList();
    return 0;
 }
